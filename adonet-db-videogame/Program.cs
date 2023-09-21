@@ -8,13 +8,13 @@ Console.WriteLine("Benvenuto nel nostro sistema di gestione Videogiochi!");
 
 while (true)
 {
-    Console.WriteLine(@"
-- 1: Inserisci un nuovo videogioco;
-- 2: Ricerca un videogioco per id;
-- 3: Ricerca tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input;
-- 4: Cancella un videogioco;
-- 5: Chiudi il programma;
-");
+        Console.WriteLine(@"
+    - 1: Inserisci un nuovo videogioco;
+    - 2: Ricerca un videogioco per id;
+    - 3: Ricerca tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input;
+    - 4: Cancella un videogioco;
+    - 5: Chiudi il programma;
+    ");
 
     Console.Write("Seleziona l'opzione desiderata: ");
 
@@ -73,10 +73,6 @@ while (true)
 
             Console.WriteLine(VideogameManager.ListToString(VideogameManager.SearchByName(nameSearch)));
             break;
-
-        default:
-            Console.WriteLine("Non hai selezionato un opzione valida!");
-            break;
         case 4:
             Console.Write("Inserisci l'id del videogioco che vuoi eliminare: ");
             long idVideogameToDelete = long.Parse(Console.ReadLine());
@@ -91,13 +87,16 @@ while (true)
             {
                 Console.WriteLine("Il videogioco non è stato eliminato!");
             }
-
+            break;
+        case 5:
+            Console.WriteLine("Il programma è chiuso!");
+            Environment.Exit(0);
+            break;
+        default:
+            Console.WriteLine("Non hai selezionato un opzione valida!");
             break;
 
     }
-
-
-
 
 
 
