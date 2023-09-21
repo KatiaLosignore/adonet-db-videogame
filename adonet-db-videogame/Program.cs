@@ -67,6 +67,12 @@ while (true)
                 Console.WriteLine();
             }
             break;
+        case 3:
+            Console.WriteLine("Inserisci il nome del gioco da ricercare: ");
+            string nameSearch = Console.ReadLine();
+
+            Console.WriteLine(VideogameManager.ListToString(VideogameManager.SearchByName(nameSearch)));
+            break;
 
         default:
             Console.WriteLine("Non hai selezionato un opzione valida!");

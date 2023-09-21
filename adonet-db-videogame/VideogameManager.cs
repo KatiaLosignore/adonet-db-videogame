@@ -79,5 +79,63 @@ namespace adonet_db_videogame
                 return null;
             }
         }
+
+        //  Metodo per ricercare tutti i videogiochi aventi il nome contenente una determinata stringa inserita in input
+        public static List<Videogame> SearchByName(string name)
+        {
+            List<Videogame> videogameList = new List<Videogame>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT id, name, overview, release_date, software_house_id FROM videogames WHERE name LIKE @Name";
+
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.Add(new SqlParameter("@Name", $"%{name}%"));
+
+                    using SqlDataReader data = cmd.ExecuteReader();
+
+                    while (data.Read())
+                    {
+                        Videogame videogame = new Videogame(data.GetInt64(0), data.GetString(1), data.GetString(2), data.GetDateTime(3), data.GetInt64(4));
+
+                        videogameList.Add(videogame);
+                    }
+
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                return videogameList;
+            }
+
+        }
+
+        public static string ListToString(List<Videogame> videogameList)
+        {
+            if (videogameList.Count == 0)
+                return "Non ci sono videogiochi che corrispondono alla tua ricerca!";
+
+            string result = string.Empty;
+
+            int index = 1;
+
+
+            foreach (Videogame videogame in videogameList)
+            {
+                result += $"\r\n\t{videogame}";
+                index++;
+            }
+
+            return result;
+        }
+
+
+        
+           
+        
+
     }
 }
