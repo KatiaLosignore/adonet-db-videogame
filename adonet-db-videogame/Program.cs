@@ -52,6 +52,21 @@ while (true)
             }
 
             break;
+        case 2:
+            Console.Write("Inserisci l'id del videogioco da cercare: ");
+            long id = long.Parse(Console.ReadLine());
+
+            Videogame videogame = VideogameManager.SearchById(id);
+
+            if (videogame == null)
+            {
+                Console.WriteLine($"Il videogioco con ID {id} non è presente!");
+            } else
+            {
+                Console.WriteLine($"Il videogioco é: {videogame}");
+                Console.WriteLine();
+            }
+            break;
 
         default:
             Console.WriteLine("Non hai selezionato un opzione valida!");

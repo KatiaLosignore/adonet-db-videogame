@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -43,6 +44,39 @@ namespace adonet_db_videogame
                 }
 
                 return false;
+            }
+        }
+
+        // Metodo per ricercare un videogioco per id
+
+        public static Videogame SearchById(long id)
+        {
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT id, name, overview, release_date, software_house_id FROM videogames WHERE id = @Id";
+
+                    SqlCommand cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.Add(new SqlParameter("@Id", id));
+
+                    using (SqlDataReader data = cmd.ExecuteReader())
+
+                    while (data.Read())
+                    {
+                            Videogame videogame = new Videogame(data.GetInt64(0), data.GetString(1), data.GetString(2), data.GetDateTime(3), data.GetInt64(4));
+                            return videogame;
+                    }
+
+                    
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    
+                }
+                return null;
             }
         }
     }
