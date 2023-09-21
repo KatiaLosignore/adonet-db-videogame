@@ -66,6 +66,7 @@ namespace adonet_db_videogame
             this.SoftwareHouseId = softwarehouse_id;
         }
 
+
         // METODI
         public override string ToString()
         {
