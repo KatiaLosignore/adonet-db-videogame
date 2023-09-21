@@ -77,6 +77,22 @@ while (true)
         default:
             Console.WriteLine("Non hai selezionato un opzione valida!");
             break;
+        case 4:
+            Console.Write("Inserisci l'id del videogioco che vuoi eliminare: ");
+            long idVideogameToDelete = long.Parse(Console.ReadLine());
+
+            bool deleted = VideogameManager.DeleteVideogame(idVideogameToDelete);
+
+            if (deleted)
+            {
+                Console.WriteLine($"Il tuo videogioco con ID {idVideogameToDelete} è stato eliminato correttamente!");
+            }
+            else
+            {
+                Console.WriteLine("Il videogioco non è stato eliminato!");
+            }
+
+            break;
 
     }
 
