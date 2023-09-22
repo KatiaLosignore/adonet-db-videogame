@@ -120,13 +120,10 @@ namespace adonet_db_videogame
 
             string result = string.Empty;
 
-            int index = 1;
-
-
             foreach (Videogame videogame in videogameList)
             {
                 result += $"\r\n\t{videogame}";
-                index++;
+                
             }
 
             return result;
